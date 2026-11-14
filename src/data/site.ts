@@ -100,4 +100,4 @@ export function toolBySlug(slug: string): ToolMeta {
 }
 
 /** 문의 받을 이메일. 공개해도 되는 주소로 넣어야 합니다. */
-export const CONTACT_EMAIL = 'khdsdok123@gmail.com';
+export const CONTACT_EMAIL = 'khdsdok1458@gmail.com';
