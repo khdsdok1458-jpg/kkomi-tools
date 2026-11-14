@@ -1,0 +1,182 @@
+:root {
+  --ok: #1c7a52;
+  --ok-bg: #e8f5ef;
+  --reheat: #96631a;
+  --reheat-bg: #fdf4e6;
+  --toss: #c0392b;
+  --toss-bg: #fdeeec;
+
+  --ink: #17181a;
+  --ink2: #575a60;
+  --ink3: #94979d;
+  --line: #e9eaed;
+  --surface: #f5f6f8;
+  --bg: #ffffff;
+  --page: #e9ebee;
+
+  --r-m: 16px;
+  --r-l: 24px;
+  --tap: 48px;
+  --pad: 20px;
+  --shell: 430px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { background: var(--page); touch-action: manipulation; }
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: var(--shell);
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100%;
+}
+
+@media (min-width: 431px) { #root { box-shadow: 0 0 0 1px var(--line); } }
+
+button { border: 0; background: none; cursor: pointer; padding: 0; font: inherit;
+  letter-spacing: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 10px; }
+
+.screen { padding: 18px var(--pad) calc(env(safe-area-inset-bottom) + 32px); }
+
+h1 { margin: 0 0 6px; font-size: 26px; font-weight: 800; letter-spacing: -0.04em; }
+h2 { margin: 26px 0 12px; font-size: 14px; font-weight: 700; color: var(--ink2); }
+.lead { margin: 0 0 20px; color: var(--ink2); font-size: 15px; line-height: 1.65; }
+
+/* ---------- 고르기 ---------- */
+.opts { display: grid; gap: 10px; }
+.opts--two { grid-template-columns: repeat(2, 1fr); }
+.opts--three { grid-template-columns: repeat(3, 1fr); }
+
+.opt {
+  padding: 16px 14px;
+  border-radius: var(--r-m);
+  background: var(--surface);
+  border: 2px solid transparent;
+  text-align: left;
+  min-height: var(--tap);
+}
+
+.opt[aria-pressed='true'] { background: #fff; border-color: var(--ink); }
+.opt--center { text-align: center; }
+.opt__label { font-size: 16px; font-weight: 700; letter-spacing: -0.03em; }
+.opt__sub { margin-top: 3px; font-size: 12px; color: var(--ink2); line-height: 1.45; }
+
+/* ---------- 판정 ---------- */
+.verdict {
+  margin-top: 26px;
+  padding: 32px 22px;
+  border-radius: var(--r-l);
+  text-align: center;
+}
+
+.verdict--ok { background: var(--ok-bg); color: var(--ok); }
+.verdict--reheat { background: var(--reheat-bg); color: var(--reheat); }
+.verdict--toss { background: var(--toss-bg); color: var(--toss); }
+
+.verdict__head {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.3;
+}
+
+.verdict__limit {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.block { margin-top: 26px; }
+.block__title { font-size: 14px; font-weight: 700; color: var(--ink2); margin-bottom: 8px; }
+
+.line {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink2);
+}
+
+.line__dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 9px;
+  border-radius: 50%;
+  background: var(--ink3);
+}
+
+.line--todo { color: var(--ink); font-weight: 500; }
+.line--todo .line__dot { background: var(--toss); }
+
+/* ---------- 알아두면 ---------- */
+.fact {
+  padding: 20px 18px;
+  border-radius: var(--r-m);
+  background: var(--surface);
+  margin-bottom: 10px;
+}
+
+.fact__title { font-size: 17px; font-weight: 800; letter-spacing: -0.03em; }
+.fact__body { margin: 8px 0 0; font-size: 14px; line-height: 1.75; color: var(--ink2); }
+
+/* ---------- 공통 ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 58px;
+  border-radius: var(--r-m);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.btn:active { background: var(--line); }
+.btn--main { background: var(--ink); color: #fff; }
+.stack { margin-top: 24px; display: grid; gap: 10px; }
+
+.note {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: var(--r-m);
+  background: var(--surface);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink2);
+}
+
+.adnotice { margin: 0; text-align: center; font-size: 13px; color: var(--ink3); }
+.adband { margin-top: 36px; }
+.adslot { min-height: 60px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

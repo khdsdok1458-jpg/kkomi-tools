@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE_NAME, CONTACT_EMAIL } from '../data/site';
+---
+<Base title="개인정보처리방침" description={`${SITE_NAME}의 개인정보처리방침입니다.`}>
+  <div class="page">
+    <h1>개인정보처리방침</h1>
+    <p>{SITE_NAME}(이하 사이트)은 이용자의 개인정보를 소중히 여기며 관련 법령을 지킵니다.</p>
+
+    <h2>1. 수집하는 개인정보</h2>
+    <p>사이트는 회원가입을 받지 않으며 이름, 연락처 같은 개인정보를 직접 수집하지 않습니다.</p>
+
+    <h2>2. 기기에 저장되는 정보</h2>
+    <p>교대근무 달력과 차례상 장보기 목록에 입력한 내용은 이용자 브라우저의 로컬 저장소(localStorage)에만 저장되며 사이트 서버로 전송되지 않습니다. 브라우저의 사이트 데이터를 지우면 함께 삭제됩니다.</p>
+
+    <h2>3. 쿠키와 광고</h2>
+    <p>사이트는 Google 애드센스 광고를 게재할 수 있습니다. Google을 포함한 제3자 광고 사업자는 쿠키를 사용하여 이용자가 이 사이트나 다른 사이트를 방문한 기록을 바탕으로 광고를 게재할 수 있습니다.</p>
+    <p>Google은 광고 쿠키를 사용하여 이용자의 방문 기록에 기반한 광고를 제공합니다. 이용자는 <a href="https://www.google.com/settings/ads" rel="nofollow">Google 광고 설정</a>에서 맞춤 광고를 해제할 수 있으며, <a href="https://www.aboutads.info" rel="nofollow">www.aboutads.info</a>에서 제3자 광고 사업자의 쿠키 사용을 해제할 수 있습니다.</p>
+
+    <h2>4. 방문 통계</h2>
+    <p>사이트 개선을 위해 방문 수, 유입 경로 같은 익명 통계를 수집할 수 있으며, 이 정보로 개인을 식별하지 않습니다.</p>
+
+    <h2>5. 문의</h2>
+    <p>개인정보와 관련한 문의는 {CONTACT_EMAIL ? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> : '문의 페이지'}로 보내 주세요.</p>
+
+    <h2>6. 시행일</h2>
+    <p>이 방침은 2026년 11월 15일부터 적용됩니다.</p>
+  </div>
+</Base>

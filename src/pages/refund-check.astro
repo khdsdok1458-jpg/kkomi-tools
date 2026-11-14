@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Tool from '../tools/refund-check/Web';
+import { FACTS } from '../tools/refund-check/data/rules';
+import { toolBySlug } from '../data/site';
+const t = toolBySlug('refund-check');
+---
+<Base title={t.title} description={t.description} toolSlug="refund-check">
+  <div class="page">
+    <h1>이거 환불 될까? 청약철회 가능 여부 확인</h1>
+    <p class="intro">어디서 샀는지, 왜 환불하려는지, 어떤 상품인지 몇 가지만 답하면 환불 가능성을 판정합니다.</p>
+  </div>
+  <div class="tool-shell"><Tool client:load /></div>
+  <div class="page">
+    <h2>사용법</h2>
+    <ol>
+      <li>질문에 하나씩 답합니다. 모르는 건 모르겠다고 고르면 됩니다.</li>
+      <li>결과에서 환불 가능성과 근거 조항을 확인합니다.</li>
+      <li>판매자에게 요청할 때 결과에 나온 근거를 그대로 말하면 됩니다.</li>
+    </ol>
+
+    <h2>알아두면 손해 안 보는 것들</h2>
+    {FACTS.map((x) => (<><h3>{x.title}</h3><p>{x.body}</p></>))}
+
+    <p class="muted">전자상거래 등에서의 소비자보호에 관한 법률 제17조를 바탕으로 한 참고용 판정이며 법률 자문이 아닙니다. 분쟁이 생기면 한국소비자원(국번 없이 1372)에 상담하세요.</p>
+  </div>
+</Base>

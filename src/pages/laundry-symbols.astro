@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Tool from '../tools/wash-symbol/Web';
+import Glyph from '../tools/wash-symbol/components/Glyph';
+import { GROUPS, symbolsIn, TIPS } from '../tools/wash-symbol/data/symbols';
+import { toolBySlug } from '../data/site';
+const t = toolBySlug('laundry-symbols');
+---
+<Base title={t.title} description={t.description} toolSlug="laundry-symbols">
+  <div class="page">
+    <h1>세탁 기호 뜻, 옷 라벨 그림으로 찾기</h1>
+    <p class="intro">옷 안쪽 라벨에 있는 기호를 아래에서 같은 그림으로 찾아 누르면 뜻이 나옵니다.</p>
+  </div>
+  <div class="tool-shell"><Tool client:load /></div>
+  <div class="page">
+    <h2>사용법</h2>
+    <ol>
+      <li>라벨의 기호가 어떤 도형인지 봅니다. 대야는 물세탁, 삼각형은 표백, 사각형은 건조, 다리미는 다림질, 동그라미는 드라이클리닝입니다.</li>
+      <li>위에서 같은 분류 탭을 누릅니다.</li>
+      <li>똑같이 생긴 그림을 누르면 뜻과 주의할 점이 나옵니다.</li>
+    </ol>
+
+    <h2>세탁 기호 전체 목록</h2>
+    {GROUPS.map((g) => (
+      <section>
+        <h3>{g.label} 기호 ({g.hint})</h3>
+        <table>
+          <tbody>
+            {symbolsIn(g.id).map((s) => (
+              <tr>
+                <td style="width:52px"><Glyph symbol={s} size={40} /></td>
+                <td><strong>{s.name}</strong><br />{s.meaning}{s.note && <><br /><span class="muted">{s.note}</span></>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))}
+
+    <h2>옷 버리지 않는 법</h2>
+    {TIPS.map((x) => (<><h3>{x.title}</h3><p>{x.body}</p></>))}
+
+    <p class="muted">기호는 국제표준화기구(ISO) 기준입니다. 나라마다 표기가 조금씩 다를 수 있습니다.</p>
+  </div>
+</Base>

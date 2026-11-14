@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE_NAME, SITE_DESC, TOOLS } from '../data/site';
+---
+<Base title={`${SITE_NAME}, 생활하다 막힐 때 바로 확인하는 무료 도구`} description={SITE_DESC}>
+  <div class="page">
+    <h1>{SITE_NAME}</h1>
+    <p class="intro">{SITE_DESC} 가입 없이 바로 쓸 수 있습니다.</p>
+    <ul class="tool-list">
+      {TOOLS.map((t) => (
+        <li><a href={`/${t.slug}/`}><strong>{t.name}</strong><span>{t.summary}</span></a></li>
+      ))}
+    </ul>
+  </div>
+</Base>

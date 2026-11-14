@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Tool from '../tools/food-safe/Web';
+import { FOODS, TEMPS, FACTS } from '../tools/food-safe/data/rules';
+import { toolBySlug } from '../data/site';
+const t = toolBySlug('food-room-temp');
+const fmt = (h: number) => (h < 1 ? `${Math.round(h * 60)}분` : `${h}시간`);
+---
+<Base title={t.title} description={t.description} toolSlug="food-room-temp">
+  <div class="page">
+    <h1>상온에 둔 음식, 먹어도 될까?</h1>
+    <p class="intro">음식 종류, 방 온도, 지난 시간을 고르면 먹어도 되는지, 다시 데워야 하는지, 버려야 하는지 알려드립니다.</p>
+  </div>
+  <div class="tool-shell"><Tool client:load /></div>
+  <div class="page">
+    <h2>사용법</h2>
+    <ol>
+      <li>둔 음식이 어떤 종류인지 고릅니다.</li>
+      <li>방이 더운지, 보통인지, 서늘한지 고릅니다.</li>
+      <li>조리가 끝난 뒤 얼마나 지났는지 고릅니다. 배달 음식은 받은 순간이 아니라 조리가 끝난 순간부터 셉니다.</li>
+    </ol>
+
+    <h2>음식별 실온 보관 기준</h2>
+    <p>방 온도가 보통(실내 20도에서 28도쯤)일 때 기준입니다.</p>
+    <table>
+      <thead><tr><th>음식</th><th>버틸 수 있는 시간</th></tr></thead>
+      <tbody>
+        {FOODS.map((f) => (
+          <tr>
+            <td><strong>{f.name}</strong><br /><span class="muted">{f.examples}</span>{f.note && <><br />{f.note}</>}</td>
+            <td>{fmt(f.hours)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2>방 온도에 따라 달라지는 시간</h2>
+    <ul>
+      {TEMPS.map((x) => (
+        <li><strong>{x.label}</strong> ({x.hint}): 기준 시간의 {x.factor}배</li>
+      ))}
+    </ul>
+
+    <h2>알아두면 좋은 것</h2>
+    {FACTS.map((x) => (<><h3>{x.title}</h3><p>{x.body}</p></>))}
+
+    <p class="muted">식품의약품안전처와 세계보건기구 권고를 바탕으로 한 참고용 판정입니다. 의료 판단을 대신하지 않으며, 애매하면 버리는 쪽이 안전합니다.</p>
+  </div>
+</Base>

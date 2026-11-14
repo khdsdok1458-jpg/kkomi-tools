@@ -1,0 +1,14 @@
+.sz { padding: 18px 20px 24px; }
+.sz-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.sz-tab { min-height: 44px; padding: 0 14px; border-radius: 12px; background: #f4f6f8; color: #555b64; font: inherit; font-weight: 600; border: 2px solid transparent; cursor: pointer; }
+.sz-tab[aria-pressed='true'] { background: #fff; border-color: #14161a; color: #14161a; }
+.sz-field { display: block; }
+.sz-field span { display: block; font-size: 14px; font-weight: 600; color: #555b64; margin-bottom: 6px; }
+.sz-field input, .sz-field select { width: 100%; box-sizing: border-box; min-height: 50px; padding: 0 14px; border: 2px solid #e7eaee; border-radius: 12px; font: inherit; font-size: 18px; background: #fff; color: #14161a; }
+.sz-field input:focus, .sz-field select:focus { outline: none; border-color: #2e6bd4; }
+.sz-result { margin-top: 16px; padding: 16px; border-radius: 16px; background: #f4f6f8; }
+.sz-result dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; }
+.sz-result dt { font-size: 13px; color: #555b64; }
+.sz-result dd { margin: 2px 0 0; font-size: 22px; font-weight: 800; color: #14161a; }
+.sz-note { margin: 12px 0 0; font-size: 13px; color: #555b64; }
+.sz-warn { margin: 0 0 10px; font-size: 14px; color: #b3472f; font-weight: 600; }

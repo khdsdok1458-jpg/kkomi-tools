@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Ring from '../tools/sizes/Ring';
+import { ringFromCircumference, fmt } from '../tools/sizes/data';
+import { toolBySlug } from '../data/site';
+const t = toolBySlug('ring-size');
+const rows = Array.from({ length: 30 }, (_, i) => { const c = 44 + i; return { c, ...ringFromCircumference(c) }; });
+---
+<Base title={t.title} description={t.description} toolSlug="ring-size">
+  <div class="page">
+    <h1>반지 호수, 손가락 둘레로 바로 찾기</h1>
+    <p class="intro">손가락 둘레, 반지 안지름, 한국 호수, 미국 사이즈 중 아는 것 하나만 넣으면 나머지를 모두 알려드립니다.</p>
+  </div>
+  <div class="tool-shell"><Ring client:load /></div>
+  <div class="page">
+    <h2>손가락 둘레 재는 법</h2>
+    <ol>
+      <li>실이나 얇은 종이 띠를 반지 낄 자리에 한 바퀴 감습니다. 너무 조이지 않게, 마디를 통과할 수 있을 정도로 감으세요.</li>
+      <li>겹치는 지점에 펜으로 표시합니다.</li>
+      <li>펼쳐서 표시한 곳까지 자로 재면 그 길이가 손가락 둘레(mm)입니다.</li>
+    </ol>
+    <p>이미 잘 맞는 반지가 있다면 반지 안쪽 끝에서 반대쪽 안쪽 끝까지 잰 안지름을 넣어도 됩니다. 둘레는 안지름에 원주율(약 3.14)을 곱한 값입니다.</p>
+    <p>손가락은 아침보다 저녁에, 더운 날에 조금 붓습니다. 두세 번 재서 비슷하게 나오는 값을 쓰고, 폭이 5mm 넘는 넓은 반지는 반 호수에서 한 호수 정도 여유 있게 고르는 게 편합니다.</p>
+
+    <h2>반지 호수표 (1호~30호)</h2>
+    <table>
+      <thead><tr><th>한국 호수</th><th>둘레</th><th>안지름</th><th>미국 US</th><th>유럽 EU</th></tr></thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr><td><strong>{r.kr}호</strong></td><td>{r.c}mm</td><td>{fmt(Math.round(r.diameter * 10) / 10)}mm</td><td>{fmt(r.us)}</td><td>{r.eu}</td></tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2>계산 기준</h2>
+    <ul>
+      <li>한국 호수는 손가락 둘레(mm)에서 43을 뺀 값입니다. 1호가 44mm, 10호가 53mm입니다.</li>
+      <li>미국 사이즈는 한 단계 올라갈 때마다 둘레가 약 2.55mm 늘어나며, US 6이 둘레 약 51.8mm입니다. 표에서는 가장 가까운 0.5 단위로 반올림했습니다.</li>
+      <li>유럽(EU) 사이즈는 국제 표준(ISO 8653)에 따라 안쪽 둘레 mm를 그대로 씁니다.</li>
+    </ul>
+    <p class="muted">브랜드마다 반올림 방식이 조금씩 달라 반 호수 정도 차이가 날 수 있습니다. 비싼 반지는 판매처 사이즈표를 꼭 함께 확인하세요.</p>
+  </div>
+</Base>

@@ -1,0 +1,391 @@
+:root {
+  --bg: #ffffff;
+  --page: #e9eaee;
+  --surface: #f4f5f7;
+  --line: #e8eaee;
+  --ink: #111318;
+  --ink2: #575e6b;
+  --ink3: #949bab;
+  --cta: #3182f6;
+
+  --r-m: 16px;
+  --r-l: 26px;
+  --tap: 48px;
+  --pad: 20px;
+  --shell: 430px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { background: var(--page); touch-action: manipulation; }
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont,
+    'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: var(--shell);
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100%;
+}
+
+@media (min-width: 431px) { #root { box-shadow: 0 0 0 1px var(--line); } }
+
+button, input, select { font: inherit; letter-spacing: inherit; color: inherit; }
+button { border: 0; background: none; cursor: pointer; padding: 0; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 10px; }
+
+.num { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+
+.screen { padding: 18px var(--pad) calc(env(safe-area-inset-bottom) + 32px); }
+
+/* ---------- 오늘 ---------- */
+.today__date {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink3);
+}
+
+/* 오늘 근무가 화면을 압도합니다. 앱을 여는 유일한 이유입니다. */
+.today__card {
+  margin-top: 14px;
+  padding: 34px 24px;
+  border-radius: var(--r-l);
+  text-align: center;
+  color: #fff;
+}
+
+.today__label {
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+
+.today__time {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.82;
+}
+
+.today__empty {
+  margin-top: 14px;
+  padding: 40px 24px;
+  border-radius: var(--r-l);
+  background: var(--surface);
+  text-align: center;
+  color: var(--ink3);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* 다음 쉬는 날. 이 앱을 매일 여는 진짜 이유입니다. */
+.off {
+  margin-top: 12px;
+  padding: 22px;
+  border-radius: var(--r-l);
+  background: var(--ink);
+  color: #fff;
+}
+
+.off__big {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.off__sub {
+  margin-top: 6px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---------- 이번 주 ---------- */
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.week__cell {
+  padding: 10px 2px;
+  border-radius: 12px;
+  background: var(--surface);
+  text-align: center;
+}
+
+.week__cell--today { box-shadow: inset 0 0 0 2px var(--ink); }
+
+.week__wd {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink3);
+}
+
+.week__code {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* ---------- 달력 ---------- */
+.mon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.mon__title { font-size: 20px; font-weight: 800; letter-spacing: -0.04em; }
+
+.mon__nav {
+  width: var(--tap);
+  height: var(--tap);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cal {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.cal__wd {
+  padding-bottom: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink3);
+}
+
+.cal__wd--sun { color: #e0644a; }
+.cal__wd--sat { color: #4a5eda; }
+
+.cal__cell {
+  aspect-ratio: 1 / 1.15;
+  border-radius: 12px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 48px;
+}
+
+.cal__cell--blank { background: transparent; }
+.cal__cell--today { box-shadow: inset 0 0 0 2.5px var(--ink); }
+
+.cal__day { font-size: 12px; font-weight: 600; color: var(--ink3); }
+
+.cal__code {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* ---------- 붓 ---------- */
+.brush {
+  position: sticky;
+  bottom: 0;
+  margin: 18px calc(var(--pad) * -1) 0;
+  padding: 14px var(--pad) calc(14px + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1px solid var(--line);
+}
+
+.brush__hint {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--ink2);
+}
+
+.brush__row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.brush__btn {
+  flex: 1;
+  min-width: 62px;
+  min-height: var(--tap);
+  border-radius: 12px;
+  background: var(--surface);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  border: 2.5px solid transparent;
+}
+
+.brush__btn[aria-pressed='true'] { border-color: var(--ink); background: #fff; }
+
+/* ---------- 공통 ---------- */
+h1 { margin: 0 0 6px; font-size: 26px; font-weight: 800; letter-spacing: -0.04em; }
+h2 { margin: 30px 0 12px; font-size: 14px; font-weight: 700; color: var(--ink2); }
+
+.lead { margin: 0 0 22px; color: var(--ink2); font-size: 15px; }
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px;
+  border-radius: var(--r-m);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.btn:active { background: var(--line); }
+.btn--main { background: var(--cta); color: #fff; }
+.btn--main:active { background: #1b64da; }
+
+.stack { margin-top: 22px; display: grid; gap: 10px; }
+
+.rows { border-top: 1px solid var(--line); }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 62px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.row__dot {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.row__body { flex: 1; min-width: 0; }
+.row__name { font-size: 16px; font-weight: 600; }
+.row__meta { margin-top: 2px; font-size: 13px; color: var(--ink3); }
+.row__count { flex: none; font-size: 17px; font-weight: 800; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.chip {
+  min-height: var(--tap);
+  padding: 0 16px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink2);
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid transparent;
+}
+
+.chip[aria-pressed='true'] { background: #fff; border-color: var(--ink); color: var(--ink); }
+
+.field { margin-bottom: 22px; }
+
+.field__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink2);
+}
+
+.input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 16px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-m);
+  background: #fff;
+  font-size: 16px;
+}
+
+.input:focus { border-color: var(--cta); outline: none; }
+
+/* 반드시 채워야 하는 항목 표시 */
+.dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 5px;
+  vertical-align: 5px;
+  border-radius: 50%;
+  background: #e0644a;
+}
+
+/* 비어 있을 때 자리를 차지하면 화면이 밀립니다. */
+.req {
+  margin: 0 0 10px;
+  color: #e0644a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.req:empty { display: none; }
+
+.empty {
+  padding: 44px 0;
+  text-align: center;
+  color: var(--ink3);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.note {
+  margin-top: 12px;
+  padding: 16px;
+  border-radius: var(--r-m);
+  background: var(--surface);
+  color: var(--ink2);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* 광고가 나온다는 걸 버튼 바로 위에서 알려줍니다. */
+.adnotice {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink3);
+}
+
+.adband { margin-top: 36px; }
+.adslot { min-height: 60px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Tool from '../tools/box-size/Web';
+import { BOXES, TIERS, LIMIT, FACTS } from '../tools/box-size/data/boxes';
+import { toolBySlug } from '../data/site';
+const t = toolBySlug('parcel-box-size');
+---
+<Base title={t.title} description={t.description} toolSlug="parcel-box-size">
+  <div class="page">
+    <h1>택배 박스 사이즈 계산기</h1>
+    <p class="intro">물건의 가로, 세로, 높이를 넣으면 들어가는 박스 호수와 택배 크기 구간을 알려드립니다.</p>
+  </div>
+  <div class="tool-shell"><Tool client:load /></div>
+  <div class="page">
+    <h2>사용법</h2>
+    <ol>
+      <li>물건의 가로, 세로, 높이를 cm로 넣습니다.</li>
+      <li>완충재를 얼마나 넣을지 고릅니다.</li>
+      <li>들어가는 가장 작은 박스와 세 변 합 기준 크기 구간이 나옵니다.</li>
+    </ol>
+    <p>세 변의 합만 보면 틀립니다. 박스에 들어가려면 각 변이 따로 맞아야 해서, 물건을 돌려 넣는 여섯 방향을 모두 따져 계산합니다.</p>
+
+    <h2>우체국 박스 호수별 크기</h2>
+    <table>
+      <thead><tr><th>호수</th><th>크기(cm)</th><th>주로 담는 것</th></tr></thead>
+      <tbody>
+        {BOXES.map((b) => (
+          <tr><td><strong>{b.name}</strong></td><td>{b.dims.join(' × ')}</td><td>{b.use}</td></tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="muted">판매처에 따라 내경과 외경 표기가 달라 1cm 안팎 차이가 날 수 있습니다.</p>
+
+    <h2>세 변 합에 따른 크기 구간</h2>
+    <ul>
+      {TIERS.map((x) => (<li><strong>{x.name}</strong>: 세 변 합 {x.upTo}cm 이하</li>))}
+    </ul>
+    <p>우체국 접수 기준으로 세 변 합은 {LIMIT.minSum}cm 이상 {LIMIT.maxSum}cm 이하, 한 변은 {LIMIT.maxSide}cm 이하, 무게는 {LIMIT.maxWeight}kg 이하여야 합니다.</p>
+
+    <h2>알아두면 좋은 것</h2>
+    {FACTS.map((x) => (<><h3>{x.title}</h3><p>{x.body}</p></>))}
+  </div>
+</Base>

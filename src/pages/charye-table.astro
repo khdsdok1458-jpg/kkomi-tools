@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Tool from '../tools/charye-table/Web';
+import { DISHES, ROW_LABEL, TIPS, rowsFor } from '../tools/charye-table/data/table';
+import { toolBySlug } from '../data/site';
+const t = toolBySlug('charye-table');
+const rows = rowsFor('full');
+---
+<Base title={t.title} description={t.description} toolSlug="charye-table">
+  <div class="page">
+    <h1>차례상 차리는 법, 배치도로 보기</h1>
+    <p class="intro">음식을 누르면 왜 그 자리에 놓는지 알려드립니다. 간소화 상차림과 장보기 목록도 있습니다.</p>
+  </div>
+  <div class="tool-shell"><Tool client:only="react" /></div>
+  <div class="page">
+    <h2>사용법</h2>
+    <ol>
+      <li>전통 5열과 간소하게 중에서 고릅니다.</li>
+      <li>배치도에서 음식을 누르면 놓는 이유가 나옵니다.</li>
+      <li>장보기 목록에서 산 것을 체크하면 이 기기에 저장됩니다.</li>
+    </ol>
+    <p>배치도 위쪽이 신위가 있는 북쪽이고, 상 앞에서 볼 때 왼쪽이 서쪽, 오른쪽이 동쪽입니다.</p>
+
+    <h2>줄별 차례상 음식 위치</h2>
+    {rows.map((r) => (
+      <section>
+        <h3>{ROW_LABEL[r]}</h3>
+        <ul>
+          {DISHES.filter((d) => d.row === r).sort((a, b) => a.pos - b.pos).map((d) => (
+            <li><strong>{d.name}</strong>{d.rule && <> ({d.rule})</>}: {d.why}</li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <h2>상 앞에서 헷갈리는 것들</h2>
+    {TIPS.map((x) => (<><h3>{x.title}</h3><p>{x.body}</p></>))}
+
+    <p class="muted">집안과 지역마다 상차림이 다를 수 있습니다. 집안의 방식이 있다면 그것을 따르세요.</p>
+  </div>
+</Base>
